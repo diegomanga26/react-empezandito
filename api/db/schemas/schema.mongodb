@@ -1,0 +1,32 @@
+use("login");
+
+db.createCollection("user", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["correo", "password"],
+            properties: {
+                correo: {
+                    bsonType: "string",
+                    pattern: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
+                    description: "La dirección de correo electrónico debe ser obligatoria"
+                },
+                password: {
+                    bsonType: "string",
+                    description: "La contraseña es obligatoria"
+                }
+            }
+        }
+    }
+});
+
+db.user.insertMany([
+    {
+        correo: "adrianjbuenop@gmail.com",
+        password: "Ajbp170605" 
+    },
+    {
+        correo: "adrian@gmail.com",
+        password: "adrian1234"
+    }
+]);
