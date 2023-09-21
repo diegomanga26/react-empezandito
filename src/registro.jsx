@@ -1,4 +1,4 @@
-//import React from 'react';
+const url = import.meta.env;
 
 export default function Registrico() {
     const registrar = async (e) => {
@@ -15,7 +15,7 @@ export default function Registrico() {
             },
             body: JSON.stringify(registrarse)
         };
-        let respuesta = await fetch("http://deboponerlaurlaqui", request);
+        let respuesta = await fetch(`http://${url.VITE_HOST_BACK}:${url.VITE_PORT_BACK}/usuario/registro`, request);
         const respuestaJson = await respuesta.json();
         console.log(respuestaJson);
     }
