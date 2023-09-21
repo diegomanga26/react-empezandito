@@ -1,0 +1,15 @@
+use("react_login");
+db.createCollection("usuario", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            additionalProperties: false,
+            required: ["contraseña", "correo"],
+            properties: {
+                _id: { bsonType: 'objectId' },
+                correo: { bsonType: "string", description: "correo is required" },
+                contraseña: { bsonType: "string", description: "contraseña is required" }
+            }
+        }
+    }
+});

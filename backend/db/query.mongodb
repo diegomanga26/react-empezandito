@@ -1,0 +1,12 @@
+use("react_login");
+db.usuario.insertMany([
+
+    {
+        correo: "hola@hotmail.com",
+        contraseña: "hola123456"
+    },
+    {
+        correo: "chao@gmail.com",
+        contraseña: "chao123456"
+    }
+]);
