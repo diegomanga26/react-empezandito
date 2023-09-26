@@ -15,11 +15,9 @@ export const registerUsuario = async(req, res) =>{
                 correo: correoReg,
                 contraseña: contraseñaReg
             });
-            if (!registro) {
+            if (registro) {
                 return res.status(200).json({})
-            } else {
-                return res.status(201).json({})
-            };
+            }
             
         } else {
             return res.status(201).json({});
