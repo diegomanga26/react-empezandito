@@ -1,23 +1,26 @@
-//import React from 'react';
+const url = import.meta.env;
+import axios from "axios";
 
 export default function Logincito() {
     const loggear = async (e) => {
         e.preventDefault();
         let correoLog = document.querySelector("#papa").value;
         let contraseñaLog = document.querySelector("#ñame").value;
-        let loggearse = { correoLog, contraseñaLog };
-        console.log(loggearse);
-
-        const request = {
-            method: "POST",
+        const response = await axios.post(`http://${url.VITE_HOST_BACK}:${url.VITE_PORT_BACK}/usuario/login`, {
+            correoLog,
+            contraseñaLog
+            }, 
+            {
             headers: {
-                "Content-Type": "application/json"
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify(loggearse)
+            });
+        if (response.status===200){
+            alert("Loggeado correctamente.");
+        } else {
+            alert("Verifique su usuario o contraseña.");
         };
-        let respuesta = await fetch("http://deboponerlaurlaqui", request);
-        const respuestaJson = await respuesta.json();
-        console.log(respuestaJson);
+
     }
     return (
         <body className='bg-dark'>

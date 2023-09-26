@@ -31,13 +31,13 @@ export const registerUsuario = async(req, res) =>{
 }
 export const loginUsuario = async(req, res) =>{
     try {
-        const {correoReg, contraseñaReg} = req.body;
+        const {correoLog, contraseñaLog} = req.body;
         const user = await usuario.findOne({
-            correo: correoReg,
-            contraseña: contraseñaReg
+            correo: correoLog,
+            contraseña: contraseñaLog
         });
 
-        if (!user){
+        if (user){
             return res.status(200).json({});
         } else {
             return res.status(201).json({})
