@@ -1,17 +1,49 @@
-import { con } from "../db/config/atlas.js";
+import {con} from "../db/config/atlas.js"
 
-export async function registerUsuario(req, res) {
+const db = await con();
+const usuario = db.collection("usuario");
+
+export const registerUsuario = async(req, res) =>{
     try {
-        const db = await con();
-        await db.collection("usuario").insertOne(req.body);
-        res.status(201).send("success");
-        alert("Usuario registrado")
-        return {
-            status: 201,
-            message: "success"
-        };
+        const {correoReg, contraseñaReg} = req.body;
+        const user = await usuario.findOne({
+            correo: correoReg
+        });
+        
+        if (!user){
+            const registro = await usuario.insertOne({
+                correo: correoReg,
+                contraseña: contraseñaReg
+            });
+            if (!registro) {
+                return res.status(200).json({})
+            } else {
+                return res.status(201).json({})
+            };
+            
+        } else {
+            return res.status(201).json({});
+        }
+
     } catch (error) {
-        console.error(error);
-        res.status(500).send("error");
+        throw error;
     }
+}
+export const loginUsuario = async(req, res) =>{
+    try {
+        const {correoReg, contraseñaReg} = req.body;
+        const user = await usuario.findOne({
+            correo: correoReg,
+            contraseña: contraseñaReg
+        });
+
+        if (!user){
+            return res.status(200).json({});
+        } else {
+            return res.status(201).json({})
+        }
+    } catch (error) {
+        console.log(error);
+    };
+    
 }
