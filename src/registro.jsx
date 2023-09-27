@@ -16,11 +16,16 @@ export default function Registrico() {
                 'Content-Type': 'application/json'
             },
             });
+            
         if (response.status===201){
-            alert("Usuario ya existente, por favor intente con otro correo");
-        } else {
-            alert("Usuario registrado");
-        };
+            alert("Usuario ya existente, por favor intente con otro correo.");
+        } else if(response.status===200){
+            alert("Usuario registrado.");
+        } else if(response.status===202){
+            alert("No puede registrar un vacío.")
+        } else if(response.status===203){
+            alert("Registre una contraseña por favor.")
+        }
         
     }
     return (

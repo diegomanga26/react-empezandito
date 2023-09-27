@@ -6,6 +6,11 @@ const usuario = db.collection("usuario");
 export const registerUsuario = async(req, res) =>{
     try {
         const {correoReg, contraseñaReg} = req.body;
+        if(correoReg===""){
+            return res.status(202).json({})
+        } else if(contraseñaReg===""){
+            return res.status(203).json({})
+        }
         const user = await usuario.findOne({
             correo: correoReg
         });
@@ -30,6 +35,11 @@ export const registerUsuario = async(req, res) =>{
 export const loginUsuario = async(req, res) =>{
     try {
         const {correoLog, contraseñaLog} = req.body;
+        if(correoLog===""){
+            return res.status(202).json({})
+        } else if(contraseñaLog===""){
+            return res.status(203).json({})
+        }
         const user = await usuario.findOne({
             correo: correoLog,
             contraseña: contraseñaLog

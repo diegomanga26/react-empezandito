@@ -17,9 +17,13 @@ export default function Logincito() {
             });
         if (response.status===200){
             alert("Loggeado correctamente.");
-        } else {
+        } else if(response.status===201) {
             alert("Verifique su usuario o contraseña.");
-        };
+        } else if(response.status===202) {
+            alert("Por favor ingrese su correo.")
+        } else if(response.status===203) {
+            alert("Por favor ingrese su contraseña.")
+        }
 
     }
     return (
